@@ -4,23 +4,28 @@ export default function TextForm(props) {
   const handleUpClick = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert('Converted to Upper Case', 'success');
   };
   const handleLowClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert('Converted to Lower Case', 'success');
   };
   const handleClearClick = () => {
     let newText = "";
     setText(newText);
+    props.showAlert('Cleared', 'success');
   };
   const handleCopy = () => {
     let text = document.getElementById("myBox");
     text.select();
     navigator.clipboard.writeText(text.value);
+    props.showAlert('Copied to Clipboard', 'success');
   };
   const handleExtraSpace = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
+    props.showAlert('Removed Extra Spaces', 'success');
   };
   const handleOnChange = (event) => {
     setText(event.target.value);
@@ -43,7 +48,7 @@ export default function TextForm(props) {
             value={text}
             onChange={handleOnChange}
             style={{
-              backgroundColor: props.mode === "light" ? "white" : "rgb(29 30 67)",
+              backgroundColor: props.mode === "light" ? "white" : "#2C3333",
               color: props.mode === "light" ? "black" : "white"
             }}
           ></textarea>
@@ -70,9 +75,9 @@ export default function TextForm(props) {
       >
         <h2>Your text summary</h2>
         <p>
-          {text.split(" ").length} words, {text.length} characters
+          {text.split(/[ ]+/).length} words, {text.length} characters
         </p>
-        <p>{0.008 * text.split(" ").length} minutes to read</p>
+        <p>{0.008 * text.split(/[ ]+/).length} minutes to read</p>
         <h2>Preview</h2>
         <p>{text.length > 0 ? text : "Enter something..."}</p>
       </div>
