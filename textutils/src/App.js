@@ -3,8 +3,8 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import Alert from "./components/Alert";
-// import About from "./components/About";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import About from "./components/About";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -36,7 +36,7 @@ function App() {
 
   return (
     <>
-      {/* <Router> */}
+      <Router>
       <Navbar
         title="TextUtils"
         mode={mode}
@@ -45,18 +45,18 @@ function App() {
       />
       <Alert alert={alert} />
       <div className="container my-3">
-        {/* <Routes> */}
-        {/* <Route exact path="/about" element={<About />}></Route> */}
-        {/* <Route
+        <Routes>
+        <Route exact path="/about" element={<About />}></Route>
+        <Route
               exact
               path="/"
-              element={ */}
+              element={
         <TextForm showAlert={showAlert} heading="Enter Text Here" mode={mode} />
-        {/* }
+        }
             ></Route>
-          </Routes> */}
+          </Routes>
       </div>
-      {/* </Router> */}
+      </Router>
     </>
   );
 }
