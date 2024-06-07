@@ -25,37 +25,41 @@ function App() {
       setMode("dark");
       document.body.style.backgroundColor = "#2C3333";
       showAlert("Dark mode has been enabled", "success");
-      document.title = "Textutils - DarkMode";
+      // document.title = "TextUtils - DarkMode";
     } else {
       setMode("light");
       document.body.style.backgroundColor = "white";
       showAlert("Light mode has been enabled", "success");
-      document.title = "Textutils - LightMode";
+      // document.title = "TextUtils - LightMode";
     }
   };
 
   return (
     <>
       <Router>
-      <Navbar
-        title="TextUtils"
-        mode={mode}
-        toggleMode={toggleMode}
-        aboutText="About"
-      />
-      <Alert alert={alert} />
-      <div className="container my-3">
-        <Routes>
-        <Route exact path="/about" element={<About />}></Route>
-        <Route
+        <Navbar
+          title="TextUtils"
+          mode={mode}
+          toggleMode={toggleMode}
+          aboutText="About"
+        />
+        <Alert alert={alert} />
+        <div className="container my-3">
+          <Routes>
+            <Route exact path="/about" element={<About mode = {mode}/>}></Route>
+            <Route
               exact
               path="/"
               element={
-        <TextForm showAlert={showAlert} heading="Enter Text Here" mode={mode} />
-        }
+                <TextForm
+                  showAlert={showAlert}
+                  heading="Enter Text Here"
+                  mode={mode}
+                />
+              }
             ></Route>
           </Routes>
-      </div>
+        </div>
       </Router>
     </>
   );
