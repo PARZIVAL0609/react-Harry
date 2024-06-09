@@ -17,10 +17,7 @@ export default function TextForm(props) {
     props.showAlert('Cleared', 'success');
   };
   const handleCopy = () => {
-    let text = document.getElementById("myBox");
-    text.select();
-    navigator.clipboard.writeText(text.value);
-    document.getSelection().removeAllRanges();
+    navigator.clipboard.writeText(text);
     props.showAlert('Copied to Clipboard', 'success');
   };
   const handleExtraSpace = () => {
@@ -76,9 +73,9 @@ export default function TextForm(props) {
       >
         <h2>Your text summary</h2>
         <p>
-          {text.split(' ').filter((element)=>{return element.length!==0}).length} words, {text.length} characters
+          {text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words, {text.length} characters
         </p>
-        <p>{0.008 * text.split(' ').filter((element)=>{return element.length!==0}).length} minutes to read</p>
+        <p>{0.008 * text.split(/\s+/).filter((element)=>{return element.length!==0}).length} minutes to read</p>
         <h2>Preview</h2>
         <p>{text.length > 0 ? text : "Nothing to preview"}</p>
       </div>
