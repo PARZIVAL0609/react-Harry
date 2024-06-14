@@ -41,7 +41,9 @@ export class News extends Component {
   handlePrevClick = async () => {
     let url = `https://newsapi.org/v2/top-headlines?country=${
       this.props.country
-    }&category=${this.props.category}&apiKey=878cfe49e1e8417eac579d89824049e6&page=${
+    }&category=${
+      this.props.category
+    }&apiKey=878cfe49e1e8417eac579d89824049e6&page=${
       this.state.page - 1
     }&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
@@ -64,7 +66,9 @@ export class News extends Component {
     ) {
       let url = `https://newsapi.org/v2/top-headlines?country=${
         this.props.country
-      }&category=${this.props.category}&apiKey=878cfe49e1e8417eac579d89824049e6&page=${
+      }&category=${
+        this.props.category
+      }&apiKey=878cfe49e1e8417eac579d89824049e6&page=${
         this.state.page + 1
       }&pageSize=${this.props.pageSize}`;
       this.setState({ loading: true });
@@ -92,7 +96,7 @@ export class News extends Component {
                     title={element.title ? element.title : ""}
                     description={
                       element.description
-                        ? element.description.slice(0, 88)+'...'
+                        ? element.description.slice(0, 88) + "..."
                         : ""
                     }
                     imageUrl={
@@ -101,16 +105,20 @@ export class News extends Component {
                         : "https://thumbs.dreamstime.com/b/news-newspapers-folded-stacked-word-wooden-block-puzzle-dice-concept-newspaper-media-press-release-42301371.jpg"
                     }
                     newsUrl={element.url ? element.url : ""}
+                    author={element.author ? element.author: 'Unknown'}
+                    date={element.publishedAt}
+                    source={element.source.name}
                   />
                 </div>
               );
             })}
         </div>
-        <div className="buttons d-flex justify-content-between">
+        <div className="container d-flex justify-content-between">
           <button
             type="button"
             className="btn btn-dark"
             onClick={this.handlePrevClick}
+            // style={{ display: this.state.page <= 1 ? "none" : "block" }}
             disabled={this.state.page <= 1}
           >
             &larr; Prev
@@ -119,6 +127,13 @@ export class News extends Component {
             type="button"
             className="btn btn-dark"
             onClick={this.handleNextClick}
+            // style={{
+            //   display:
+            //     this.state.page + 1 >
+            //     Math.ceil(this.state.totalResults / this.props.pageSize)
+            //       ? "none"
+            //       : "block",
+            // }}
             disabled={
               this.state.page + 1 >
               Math.ceil(this.state.totalResults / this.props.pageSize)
