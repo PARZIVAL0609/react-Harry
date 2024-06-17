@@ -28,6 +28,7 @@ export class News extends Component {
       articles: [],
       loading: true,
       page: 1,
+      totalResults: 0
     };
     document.title = `NewsMonkey - ${this.capitalize(this.props.category)}`;
   }
@@ -60,7 +61,6 @@ export class News extends Component {
   // };
 
   fetchMoreData = async () => {
-    this.setState({ page: this.state.page + 1 });
     const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=637878ef9cd34b319e0a9d5f72162e3d&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
@@ -70,6 +70,7 @@ export class News extends Component {
       articles: this.state.articles.concat(parsedData.articles),
       totalResults: parsedData.totalResults,
       loading: false,
+      page: this.state.page+1
     });
   };
 
@@ -83,7 +84,7 @@ export class News extends Component {
         <InfiniteScroll
           dataLength={this.state.articles.length}
           next={this.fetchMoreData}
-          hasMore={this.state.articles.length < this.state.totalResults}
+          hasMore={this.state.articles.length + this.props.pageSize < this.state.totalResults}
           loader={<Spinner />}
           
         >
