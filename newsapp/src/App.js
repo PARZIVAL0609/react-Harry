@@ -20,7 +20,7 @@ export default class App extends Component {
     return (
       <div>
         <Router>
-          <Navbar />
+          <Navbar/>
           <LoadingBar
             height={2}
             color="#ffffff"
