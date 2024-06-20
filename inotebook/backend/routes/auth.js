@@ -12,7 +12,7 @@ const JWT_SECRET = "ochagaume";
 router.post(
   "/createuser",
   [
-    body("name", "Enter a valis name").isLength({ min: 3 }),
+    body("name", "Enter a valid name").isLength({ min: 3 }),
     body("email", "Enter a valid email").isEmail(),
     body("password", "Password must be atleast 5 characters").isLength({
       min: 5,
@@ -104,7 +104,7 @@ router.post(
   }
 );
 
-//ROUTE 3: Get logged in user details using: POST "/api/auth/login". Login required
+//ROUTE 3: Get logged in user details using: POST "/api/auth/getuser". Login required
 router.post("/getuser", fetchuser, async (req, res) => {
   try {
     const userId = req.user.id;
