@@ -1,16 +1,13 @@
 import Notes from "./Notes";
 
 const Home = () => {
-
-
   return (
     <div>
       <div className="container my-3">
         <h2>Add a Note</h2>
-
         <form className="my-3">
           <div className="mb-3">
-            <label for="exampleInputEmail1" className="form-label">
+            <label htmlFor="exampleInputEmail1" className="form-label">
               Email address
             </label>
             <input
@@ -24,7 +21,7 @@ const Home = () => {
             </div>
           </div>
           <div className="mb-3">
-            <label for="exampleInputPassword1" className="form-label">
+            <label htmlFor="exampleInputPassword1" className="form-label">
               Password
             </label>
             <input
@@ -39,7 +36,7 @@ const Home = () => {
               className="form-check-input"
               id="exampleCheck1"
             />
-            <label className="form-check-label" for="exampleCheck1">
+            <label className="form-check-label" htmlFor="exampleCheck1">
               Check me out
             </label>
           </div>
@@ -48,7 +45,7 @@ const Home = () => {
           </button>
         </form>
       </div>
-      <Notes/>
+      <Notes />
     </div>
   );
 };
