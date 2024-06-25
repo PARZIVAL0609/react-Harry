@@ -17,7 +17,6 @@ const NoteState = (props) => {
       },
     });
     const json = await response.json();
-    // console.log(json);
     setNotes(json);
   };
 
@@ -32,18 +31,10 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }),
     });
-    const json = response.json();
-    const note = {
-      _id: "3676f2b3f464093fb3d53953",
-      user: "66743a0a2320b67f391d9aa7",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2024-06-22T15:50:12.353Z",
-      __v: 0,
-    };
+    const note = await response.json();
     setNotes(notes.concat(note));
-    console.log(json);
+    // eslint-disable-next-line
+    console.log(note)
   };
 
   //Delete a note
@@ -56,11 +47,12 @@ const NoteState = (props) => {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjY3NDNhMGEyMzIwYjY3ZjM5MWQ5YWE3In0sImlhdCI6MTcxODg5ODIyMn0.Jz9t2LWUhC0q_5tHpoJ0MTyJLVIbww6jylkhnQAgmyg",
       },
     });
-    const json = response.json();
+    const json = await response.json();
     const newNote = notes.filter((note) => {
       return note._id !== id;
     });
     setNotes(newNote);
+    // eslint-disable-next-line
     console.log(json);
   };
 
@@ -91,6 +83,7 @@ const NoteState = (props) => {
       }
     }
     setNotes(newNotes);
+    // eslint-disable-next-line
     console.log(json);
   };
 
