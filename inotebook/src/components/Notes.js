@@ -2,13 +2,22 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import noteContext from "../context/Notes/noteContext";
 import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
+import { useNavigate } from "react-router-dom";
 
 const Notes = (props) => {
   const context = useContext(noteContext);
   const { notes, getNotes, editNote } = context;
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getNotes();
+    const token = localStorage.getItem("token");
+    console.log("Token:", token);
+    if (token) {
+      getNotes();
+    } else {
+      console.log("Redirecting to login...");
+      navigate('/login');
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -35,7 +44,7 @@ const Notes = (props) => {
     editNote(note.id, note.etitle, note.edescription, note.etag);
     e.preventDefault();
     refClose.current.click();
-    props.showAlert("Updated Successfully", 'success')
+    props.showAlert("Updated Successfully", "success");
   };
 
   const handleChange = (e) => {
@@ -43,7 +52,7 @@ const Notes = (props) => {
   };
   return (
     <>
-      <AddNote showAlert={props.showAlert}/>
+      <AddNote showAlert={props.showAlert} />
       <button
         type="button"
         className="btn btn-primary d-none"
@@ -134,7 +143,9 @@ const Notes = (props) => {
                 type="button"
                 className="btn btn-primary"
                 onClick={handleClick}
-                disabled={note.etitle.length < 5 || note.edescription.length < 5}
+                disabled={
+                  note.etitle.length < 5 || note.edescription.length < 5
+                }
               >
                 Update Note
               </button>
@@ -149,7 +160,12 @@ const Notes = (props) => {
         </div>
         {notes.map((note) => {
           return (
-            <NoteItem key={note._id} updateNote={updateNote} note={note} showAlert={props.showAlert}/>
+            <NoteItem
+              key={note._id}
+              updateNote={updateNote}
+              note={note}
+              showAlert={props.showAlert}
+            />
           );
         })}
       </div>
