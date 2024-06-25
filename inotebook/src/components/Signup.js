@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Signup = (props) => {
   const [creds, setCreds] = useState({
     name: "",
     email: "",
@@ -14,7 +14,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (creds.password !== creds.cpassword) {
-        alert("Passwords don't match")
+      props.showAlert("Passwords don't match", "danger");
     } else {
       const res = await fetch("http://localhost:5000/api/auth/createuser", {
         method: "POST",
@@ -32,8 +32,9 @@ const Signup = () => {
       if (json.success) {
         localStorage.setItem("token", json.authToken);
         navigate("/");
+        props.showAlert("Account created successfully", "success");
       } else {
-        alert("Invalid");
+        props.showAlert("User with that email already exists", "danger");
       }
     }
   };
