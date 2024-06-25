@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom"
 const Login = () => {
   const [creds, setCreds] = useState({ email: "", password: "" });
 
-  let navigate = useNavigate()
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,9 +46,6 @@ const Login = () => {
             value={creds.email}
             onChange={handleChange}
           />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
-          </div>
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">
