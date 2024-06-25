@@ -17,13 +17,12 @@ const NoteState = (props) => {
       },
     });
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
     setNotes(json);
   };
 
   //Add a note
   const addNote = async (title, description, tag) => {
-    //todo api
     const response = await fetch(`${host}/api/notes/addnote`, {
       method: "POST",
       headers: {
@@ -49,9 +48,8 @@ const NoteState = (props) => {
 
   //Delete a note
   const deleteNote = async (id) => {
-    //todo api
     const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
-      method: "POST",
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         "auth-token":
@@ -93,7 +91,7 @@ const NoteState = (props) => {
 
   return (
     <noteContext.Provider
-      value={{ notes, setNotes, addNote, deleteNote, editNote,getNotes }}
+      value={{ notes, setNotes, addNote, deleteNote, editNote, getNotes }}
     >
       {props.children}
     </noteContext.Provider>
